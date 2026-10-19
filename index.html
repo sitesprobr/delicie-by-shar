@@ -211,6 +211,46 @@
       margin: 10px 4px 0
     }
 
+    .thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex: none;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      background: var(--card)
+    }
+
+    li .nome-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0
+    }
+
+    .demo-video {
+      width: 100%;
+      max-height: 360px;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      border-radius: 16px;
+      margin: 4px 0 10px;
+      border: 2px solid var(--line);
+      background: #000;
+      display: block;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .12)
+    }
+
+    @media (min-width:620px) {
+      .demo-video {
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto
+      }
+    }
+
     .cta {
       background: var(--card);
       border: 1px solid var(--line);
@@ -480,6 +520,7 @@
 
     <section>
       <h2>Bolo no pote</h2>
+      <video class="demo-video" src="pote.mp4" autoplay muted loop playsinline preload="metadata"></video>
       <ul id="pote"></ul>
       <p class="obs">Nosso carro-chefe! Escolha o sabor.</p>
     </section>
@@ -571,20 +612,26 @@
 
   <script>
     var data = {
-      bolos: ["Bolo de leite ninho", "Bolo de chocolate", "Bolo formigueiro", "Bolo de fubá", "Bolo Mármore", "Bolo de leite de côco", "Bolo de côco", "Bolo de Milho", "Bolo Fubá Cremoso"],
+      bolos: ["Bolo de leite ninho", "Bolo de chocolate", "Bolo formigueiro", "Bolo de fubá", "Bolo Mármore", "Bolo de leite de côco", ["Bolo de côco", "", "imagens/bolo-coco.png"], "Bolo de Milho", "Bolo Fubá Cremoso"],
       doces: [["Brigadeiro", "R$ 120 o cento"], ["Beijinho", "R$ 120 o cento"], ["Leite ninho", "R$ 120 o cento"], ["Casadinho", "R$ 120 o cento"], ["Cajuzinho", "R$ 120 o cento"], ["Brigadeiro de limão", "R$ 120 o cento"], ["Brigadeiro de Leite Ninho", "R$ 120 o cento"]],
       pote: ["Bolo no pote – Ninho", "Bolo no pote – Chocolatudo", "Bolo no pote – Ninho com brigadeiro", "Bolo no pote – Abacaxi", "Bolo no pote – Floresta negra", "Bolo no pote – Prestígio"],
       aniversario: [["Bolo de aniversário", "a combinar"], ["Fatias de bolo para aniversário", "a combinar"], ["Bolos no pote para aniversário", "a combinar"]],
-      mais: [["Pudim de leite", "condensado"], ["Manjar – Mouses", ""]]
+      mais: [["Pudim de leite", "condensado", "imagens/pudim.png"], ["Manjar – Mouses", ""]]
     };
     var qty = {};
     function render(id, list) {
       var ul = document.getElementById(id);
       list.forEach(function (it) {
-        var n = Array.isArray(it) ? it[0] : it, sub = Array.isArray(it) ? it[1] : "";
+        var n = Array.isArray(it) ? it[0] : it, sub = Array.isArray(it) ? it[1] : "", img = Array.isArray(it) ? it[2] : "";
         var li = document.createElement("li");
+        var wrap = document.createElement("div"); wrap.className = "nome-wrap";
+        if (img) {
+          var im = document.createElement("img"); im.className = "thumb"; im.src = img; im.alt = n; im.loading = "lazy";
+          wrap.appendChild(im);
+        }
         var s = document.createElement("span"); s.textContent = n;
         if (sub) { var sm = document.createElement("small"); sm.textContent = sub; s.appendChild(sm); }
+        wrap.appendChild(s);
         var q = document.createElement("div"); q.className = "q";
         var minus = document.createElement("button"); minus.textContent = "−"; minus.setAttribute("aria-label", "Remover " + n); minus.hidden = true;
         var out = document.createElement("output"); out.hidden = true;
@@ -592,7 +639,7 @@
         function upd() { var c = qty[n] || 0; minus.hidden = out.hidden = !c; out.textContent = c; sync(); }
         plus.onclick = function () { qty[n] = (qty[n] || 0) + 1; upd(); };
         minus.onclick = function () { qty[n] = Math.max(0, (qty[n] || 0) - 1); upd(); };
-        q.append(minus, out, plus); li.append(s, q); ul.appendChild(li);
+        q.append(minus, out, plus); li.append(wrap, q); ul.appendChild(li);
       });
     }
     render("pote", data.pote); render("bolos", data.bolos); render("doces", data.doces); render("aniversario", data.aniversario); render("mais", data.mais);
