@@ -1,0 +1,4 @@
+Salve a logo da Delicie by Shar nesta pasta com o nome: logo.png
+
+Depois me avise que eu troco o circulo tracejado pela logo real no cabecalho.
+Pode apagar este arquivo depois.
