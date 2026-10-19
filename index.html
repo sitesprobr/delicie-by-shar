@@ -301,6 +301,138 @@
       outline: 3px solid var(--accent);
       outline-offset: 2px
     }
+
+    /* ===== Carrinho / resumo do pedido ===== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s
+    }
+
+    .overlay.aberto {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .drawer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 21;
+      background: var(--bg);
+      border-radius: 22px 22px 0 0;
+      max-width: 620px;
+      margin: 0 auto;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform .28s ease;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, .25)
+    }
+
+    .drawer.aberto {
+      transform: translateY(0)
+    }
+
+    .drawer-topo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 10px
+    }
+
+    .drawer-topo h3 {
+      font-family: 'Pacifico', cursive;
+      font-weight: 400;
+      font-size: 24px;
+      margin: 0;
+      color: var(--accent)
+    }
+
+    .drawer-fechar {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--pill);
+      color: var(--ink);
+      font: 700 18px/1 inherit;
+      cursor: pointer
+    }
+
+    .drawer-itens {
+      overflow-y: auto;
+      padding: 4px 20px;
+      flex: 1
+    }
+
+    .drawer-itens .vazio {
+      color: var(--muted);
+      text-align: center;
+      padding: 30px 0
+    }
+
+    .ci {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .ci .nome {
+      flex: 1
+    }
+
+    .drawer-dados {
+      padding: 6px 20px 2px
+    }
+
+    .drawer-dados label {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      margin: 10px 0 4px;
+      color: var(--ink)
+    }
+
+    .drawer-dados input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      color: var(--ink);
+      font: 500 15px inherit;
+      padding: 11px
+    }
+
+    .drawer-dados input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px
+    }
+
+    .drawer-rodape {
+      padding: 14px 20px calc(16px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--line)
+    }
+
+    .drawer-rodape .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--onaccent);
+      font: 700 17px inherit;
+      padding: 14px;
+      cursor: pointer
+    }
   </style>
 </head>
 
@@ -331,18 +463,6 @@
       <ul id="mais"></ul>
     </section>
 
-    <div class="campos">
-      <h2 style="font-size:24px">Seus dados</h2>
-      <label for="c-nome">Seu nome</label>
-      <input id="c-nome" type="text" placeholder="Nome completo">
-      <label for="c-tel">Telefone / WhatsApp</label>
-      <input id="c-tel" type="tel" placeholder="(16) 9____-____">
-      <label for="c-end">Endereço de entrega</label>
-      <input id="c-end" type="text" placeholder="Rua, número, bairro, referência">
-      <label for="c-obs">Observações (opcional)</label>
-      <input id="c-obs" type="text" placeholder="Ex: sabor, data de entrega...">
-    </div>
-
     <div class="info">
       <h3>🕒 Horário de Atendimento</h3>
       <div class="hora"><span>Segunda a Sexta</span><strong>08h às 19h</strong></div>
@@ -371,6 +491,29 @@
 
   <div class="bar"><button id="send" disabled>Escolha itens para encomendar</button></div>
 
+  <!-- Carrinho / resumo do pedido -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Resumo do pedido">
+    <div class="drawer-topo">
+      <h3>Seu pedido 🛒</h3>
+      <button class="drawer-fechar" id="fechar" aria-label="Fechar">✕</button>
+    </div>
+    <div class="drawer-itens" id="carrinho-itens"></div>
+    <div class="drawer-dados">
+      <label for="c-nome">Seu nome</label>
+      <input id="c-nome" type="text" placeholder="Nome completo">
+      <label for="c-tel">Telefone / WhatsApp</label>
+      <input id="c-tel" type="tel" placeholder="(16) 9____-____">
+      <label for="c-end">Endereço de entrega</label>
+      <input id="c-end" type="text" placeholder="Rua, número, bairro, referência">
+      <label for="c-obs">Observações (opcional)</label>
+      <input id="c-obs" type="text" placeholder="Ex: sabor, data de entrega...">
+    </div>
+    <div class="drawer-rodape">
+      <button class="btn" id="finalizar">Enviar encomenda no WhatsApp</button>
+    </div>
+  </aside>
+
   <script>
     var data = {
       bolos: ["Bolo de leite ninho", "Bolo de chocolate", "Bolo formigueiro", "Bolo de fubá", "Bolo Mármore", "Bolo de leite de côco", "Bolo de côco", "Bolo de Milho", "Bolo Fubá Cremoso"],
@@ -397,14 +540,65 @@
       });
     }
     render("pote", data.pote); render("bolos", data.bolos); render("doces", data.doces); render("mais", data.mais);
+
+    function totalItens() { var t = 0; for (var k in qty) t += qty[k]; return t; }
+
     function sync() {
-      var t = 0; for (var k in qty) t += qty[k];
+      var t = totalItens();
       var b = document.getElementById("send");
       b.disabled = !t;
-      b.textContent = t ? "Enviar encomenda no WhatsApp (" + t + (t > 1 ? " itens" : " item") + ")" : "Escolha itens para encomendar";
+      b.textContent = t ? "Ver pedido (" + t + (t > 1 ? " itens" : " item") + ")" : "Escolha itens para encomendar";
+      if (document.getElementById("drawer").classList.contains("aberto")) renderCarrinho();
     }
+
+    // Monta a lista do carrinho dentro do painel, com + / − / remover
+    function renderCarrinho() {
+      var box = document.getElementById("carrinho-itens");
+      box.innerHTML = "";
+      var keys = []; for (var k in qty) if (qty[k]) keys.push(k);
+      var dados = document.querySelector(".drawer-dados");
+      if (!keys.length) {
+        var v = document.createElement("p"); v.className = "vazio";
+        v.textContent = "Seu pedido está vazio.";
+        box.appendChild(v);
+        document.getElementById("finalizar").disabled = true;
+        if (dados) dados.style.display = "none";
+        return;
+      }
+      if (dados) dados.style.display = "";
+      document.getElementById("finalizar").disabled = false;
+      keys.forEach(function (n) {
+        var row = document.createElement("div"); row.className = "ci";
+        var nome = document.createElement("span"); nome.className = "nome"; nome.textContent = n;
+        var q = document.createElement("div"); q.className = "q";
+        var minus = document.createElement("button"); minus.textContent = "−"; minus.setAttribute("aria-label", "Remover " + n);
+        var out = document.createElement("output"); out.textContent = qty[n];
+        var plus = document.createElement("button"); plus.textContent = "+"; plus.className = "add"; plus.setAttribute("aria-label", "Adicionar " + n);
+        minus.onclick = function () { qty[n] = Math.max(0, qty[n] - 1); if (!qty[n]) delete qty[n]; sync(); };
+        plus.onclick = function () { qty[n] = (qty[n] || 0) + 1; sync(); };
+        q.append(minus, out, plus);
+        row.append(nome, q);
+        box.appendChild(row);
+      });
+    }
+
+    function abrirCarrinho() {
+      renderCarrinho();
+      document.getElementById("overlay").classList.add("aberto");
+      document.getElementById("drawer").classList.add("aberto");
+    }
+    function fecharCarrinho() {
+      document.getElementById("overlay").classList.remove("aberto");
+      document.getElementById("drawer").classList.remove("aberto");
+    }
+
+    document.getElementById("send").onclick = abrirCarrinho;
+    document.getElementById("fechar").onclick = fecharCarrinho;
+    document.getElementById("overlay").onclick = fecharCarrinho;
+
     function val(id) { var e = document.getElementById(id); return e && e.value ? e.value.trim() : ""; }
-    document.getElementById("send").onclick = function () {
+    document.getElementById("finalizar").onclick = function () {
+      if (!totalItens()) return;
       var lines = []; for (var k in qty) if (qty[k]) lines.push("• " + qty[k] + "x " + k);
       var nome = val("c-nome"), tel = val("c-tel"), end = val("c-end"), obs = val("c-obs");
       var msg = "Olá! Gostaria de fazer uma encomenda:\n" + lines.join("\n");
