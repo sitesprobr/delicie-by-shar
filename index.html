@@ -493,6 +493,11 @@
       <ul id="doces"></ul>
     </section>
     <section>
+      <h2>🎉 Aniversários</h2>
+      <ul id="aniversario"></ul>
+      <p class="obs">Monte sua festa! Valores combinados pelo WhatsApp.</p>
+    </section>
+    <section>
       <h2>Mais delícias</h2>
       <ul id="mais"></ul>
     </section>
@@ -553,7 +558,8 @@
       bolos: ["Bolo de leite ninho", "Bolo de chocolate", "Bolo formigueiro", "Bolo de fubá", "Bolo Mármore", "Bolo de leite de côco", "Bolo de côco", "Bolo de Milho", "Bolo Fubá Cremoso"],
       doces: ["Brigadeiro", "Beijinho", "Leite ninho", "Casadinho", "Cajuzinho", "Brigadeiro de limão", "Brigadeiro de Leite Ninho"],
       pote: ["Bolo no pote – Ninho", "Bolo no pote – Chocolatudo", "Bolo no pote – Ninho com brigadeiro", "Bolo no pote – Abacaxi", "Bolo no pote – Floresta negra", "Bolo no pote – Prestígio"],
-      mais: [["Pudim de leite", "condensado"], ["Bolo de aniversário", "a combinar"], ["Manjar – Mouses", ""]]
+      aniversario: [["Bolo de aniversário", "a combinar"], ["Fatias de bolo para aniversário", "a combinar"], ["Bolos no pote para aniversário", "a combinar"]],
+      mais: [["Pudim de leite", "condensado"], ["Manjar – Mouses", ""]]
     };
     var qty = {};
     function render(id, list) {
@@ -573,7 +579,7 @@
         q.append(minus, out, plus); li.append(s, q); ul.appendChild(li);
       });
     }
-    render("pote", data.pote); render("bolos", data.bolos); render("doces", data.doces); render("mais", data.mais);
+    render("pote", data.pote); render("bolos", data.bolos); render("doces", data.doces); render("aniversario", data.aniversario); render("mais", data.mais);
 
     function totalItens() { var t = 0; for (var k in qty) t += qty[k]; return t; }
 
