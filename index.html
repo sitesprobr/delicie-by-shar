@@ -115,6 +115,35 @@
       margin: 2px 0 0
     }
 
+    .videos {
+      display: flex;
+      gap: 12px;
+      margin: 10px 0 6px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px
+    }
+
+    .videos video {
+      flex: 0 0 auto;
+      width: 72%;
+      max-width: 300px;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 2px solid var(--line);
+      background: #000;
+      scroll-snap-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .12)
+    }
+
+    @media (min-width:620px) {
+      .videos video {
+        width: 48%
+      }
+    }
+
     h2 {
       font-family: 'Pacifico', cursive;
       font-weight: 400;
@@ -443,6 +472,11 @@
       <h1>Cardápio</h1>
       <p class="tag">Sabor e carinho em cada pedaço!</p>
     </header>
+
+    <div class="videos">
+      <video src="video/video1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="video/video2.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    </div>
 
     <section>
       <h2>Bolo no pote</h2>
