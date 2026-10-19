@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Delicie by Shar – Catálogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      --bg: #fdeef0;
+      --card: #fff7f8;
+      --pill: #f9cfd6;
+      --ink: #4a2418;
+      --muted: #8a5a58;
+      --accent: #e0566f;
+      --line: #f2bcc5;
+      --onaccent: #fff;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #2a1519;
+        --card: #38202a;
+        --pill: #5a2c3a;
+        --ink: #fbe6e8;
+        --muted: #d6a7ad;
+        --accent: #ff8aa0;
+        --line: #6a3a47;
+        --onaccent: #2a1519;
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #2a1519;
+      --card: #38202a;
+      --pill: #5a2c3a;
+      --ink: #fbe6e8;
+      --muted: #d6a7ad;
+      --accent: #ff8aa0;
+      --line: #6a3a47;
+      --onaccent: #2a1519;
+      color-scheme: dark;
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Quicksand', system-ui, sans-serif;
+      font-weight: 500;
+      line-height: 1.5;
+      padding-bottom: 96px;
+      position: relative
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url("imagens/Captura de tela 2026-10-18 211539.png");
+      background-repeat: no-repeat;
+      background-position: center 38%;
+      background-size: min(78vw, 460px);
+      opacity: .07;
+      pointer-events: none
+    }
+
+    main {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 18px
+    }
+
+    header {
+      text-align: center;
+      padding: 36px 0 18px
+    }
+
+    .logo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      object-fit: cover;
+      display: block;
+      border: 3px solid var(--accent);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .12)
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-weight: 400;
+      font-size: 42px;
+      margin: 6px 0 0
+    }
+
+    .tag {
+      color: var(--muted);
+      margin: 2px 0 0
+    }
+
+    h2 {
+      font-family: 'Pacifico', cursive;
+      font-weight: 400;
+      font-size: 24px;
+      background: var(--pill);
+      border-radius: 999px;
+      padding: 6px 22px;
+      margin: 30px 0 12px;
+      display: inline-block
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 4px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    li span small {
+      display: block;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .q {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: none
+    }
+
+    .q button {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--pill);
+      color: var(--ink);
+      font: 700 20px/1 inherit;
+      cursor: pointer
+    }
+
+    .q button.add {
+      background: var(--accent);
+      color: var(--onaccent)
+    }
+
+    .q output {
+      min-width: 18px;
+      text-align: center;
+      font-weight: 700
+    }
+
+    .obs {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 10px 4px 0
+    }
+
+    .cta {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 34px;
+      text-align: center
+    }
+
+    .cta p {
+      margin: 4px 0
+    }
+
+    .cta a {
+      color: var(--accent);
+      font-weight: 700
+    }
+
+    .info {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 18px
+    }
+
+    .info h3 {
+      font-family: 'Pacifico', cursive;
+      font-weight: 400;
+      font-size: 22px;
+      margin: 0 0 10px;
+      color: var(--accent)
+    }
+
+    .info ul.lista {
+      margin: 0
+    }
+
+    .info ul.lista li {
+      justify-content: flex-start;
+      gap: 8px;
+      border: 0;
+      padding: 5px 0
+    }
+
+    .info .hora {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed var(--line);
+      padding: 6px 0
+    }
+
+    .info .aviso {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 10px 0 0
+    }
+
+    .campos {
+      margin-top: 18px
+    }
+
+    .campos label {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+      margin: 12px 0 4px;
+      color: var(--ink)
+    }
+
+    .campos input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--ink);
+      font: 500 15px inherit;
+      padding: 12px
+    }
+
+    .campos input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px
+    }
+
+    .bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 12px 18px calc(12px + env(safe-area-inset-bottom, 0px));
+      background: var(--bg);
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: center
+    }
+
+    .bar button {
+      width: 100%;
+      max-width: 584px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--onaccent);
+      font: 700 17px inherit;
+      padding: 14px;
+      cursor: pointer
+    }
+
+    .bar button:disabled {
+      opacity: .55;
+      cursor: default
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <img class="logo" src="imagens/Captura de tela 2026-10-18 211539.png" alt="Logo Delicie by Shar">
+      <h1>Cardápio</h1>
+      <p class="tag">Sabor e carinho em cada pedaço!</p>
+    </header>
+
+    <section>
+      <h2>Bolo no pote</h2>
+      <ul id="pote"></ul>
+      <p class="obs">Nosso carro-chefe! Escolha o sabor.</p>
+    </section>
+    <section>
+      <h2>Bolos Caseiros</h2>
+      <ul id="bolos"></ul>
+      <p class="obs">Obs: bolos com coberturas.</p>
+    </section>
+    <section>
+      <h2>Doces para Festas</h2>
+      <ul id="doces"></ul>
+    </section>
+    <section>
+      <h2>Mais delícias</h2>
+      <ul id="mais"></ul>
+    </section>
+
+    <div class="campos">
+      <h2 style="font-size:24px">Seus dados</h2>
+      <label for="c-nome">Seu nome</label>
+      <input id="c-nome" type="text" placeholder="Nome completo">
+      <label for="c-tel">Telefone / WhatsApp</label>
+      <input id="c-tel" type="tel" placeholder="(16) 9____-____">
+      <label for="c-end">Endereço de entrega</label>
+      <input id="c-end" type="text" placeholder="Rua, número, bairro, referência">
+      <label for="c-obs">Observações (opcional)</label>
+      <input id="c-obs" type="text" placeholder="Ex: sabor, data de entrega...">
+    </div>
+
+    <div class="info">
+      <h3>🕒 Horário de Atendimento</h3>
+      <div class="hora"><span>Segunda a Sexta</span><strong>08h às 19h</strong></div>
+      <div class="hora"><span>Sábado</span><strong>08h às 15h</strong></div>
+      <div class="hora"><span>Domingo</span><strong>Somente entrega</strong></div>
+      <p class="aviso">⏳ Encomendas com antecedência. Fale pelo WhatsApp.</p>
+    </div>
+
+    <div class="info">
+      <h3>💳 Formas de Pagamento</h3>
+      <ul class="lista">
+        <li>📱 Pix</li>
+        <li>💳 Cartão de crédito</li>
+        <li>💳 Cartão de débito</li>
+        <li>💵 Dinheiro na entrega</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <p>Tudo perfeito para sua festa, café da tarde, reunião especial!</p>
+      <p>Instagram: <a href="https://instagram.com/deliciebyshar" target="_blank" rel="noopener">@deliciebyshar</a></p>
+      <p>WhatsApp: (16) 98138-8876</p>
+      <p>Pix: (16) 98138-8876<br><small>Sharlene Chaves Guedes</small></p>
+    </div>
+  </main>
+
+  <div class="bar"><button id="send" disabled>Escolha itens para encomendar</button></div>
+
+  <script>
+    var data = {
+      bolos: ["Bolo de leite ninho", "Bolo de chocolate", "Bolo formigueiro", "Bolo de fubá", "Bolo Mármore", "Bolo de leite de côco", "Bolo de côco", "Bolo de Milho", "Bolo Fubá Cremoso"],
+      doces: ["Brigadeiro", "Beijinho", "Leite ninho", "Casadinho", "Cajuzinho", "Brigadeiro de limão", "Brigadeiro de Leite Ninho"],
+      pote: ["Bolo no pote – Ninho", "Bolo no pote – Chocolatudo", "Bolo no pote – Ninho com brigadeiro", "Bolo no pote – Abacaxi", "Bolo no pote – Floresta negra", "Bolo no pote – Prestígio"],
+      mais: [["Pudim de leite", "condensado"], ["Bolo de aniversário", "a combinar"], ["Manjar – Mouses", ""]]
+    };
+    var qty = {};
+    function render(id, list) {
+      var ul = document.getElementById(id);
+      list.forEach(function (it) {
+        var n = Array.isArray(it) ? it[0] : it, sub = Array.isArray(it) ? it[1] : "";
+        var li = document.createElement("li");
+        var s = document.createElement("span"); s.textContent = n;
+        if (sub) { var sm = document.createElement("small"); sm.textContent = sub; s.appendChild(sm); }
+        var q = document.createElement("div"); q.className = "q";
+        var minus = document.createElement("button"); minus.textContent = "−"; minus.setAttribute("aria-label", "Remover " + n); minus.hidden = true;
+        var out = document.createElement("output"); out.hidden = true;
+        var plus = document.createElement("button"); plus.textContent = "+"; plus.className = "add"; plus.setAttribute("aria-label", "Adicionar " + n);
+        function upd() { var c = qty[n] || 0; minus.hidden = out.hidden = !c; out.textContent = c; sync(); }
+        plus.onclick = function () { qty[n] = (qty[n] || 0) + 1; upd(); };
+        minus.onclick = function () { qty[n] = Math.max(0, (qty[n] || 0) - 1); upd(); };
+        q.append(minus, out, plus); li.append(s, q); ul.appendChild(li);
+      });
+    }
+    render("pote", data.pote); render("bolos", data.bolos); render("doces", data.doces); render("mais", data.mais);
+    function sync() {
+      var t = 0; for (var k in qty) t += qty[k];
+      var b = document.getElementById("send");
+      b.disabled = !t;
+      b.textContent = t ? "Enviar encomenda no WhatsApp (" + t + (t > 1 ? " itens" : " item") + ")" : "Escolha itens para encomendar";
+    }
+    function val(id) { var e = document.getElementById(id); return e && e.value ? e.value.trim() : ""; }
+    document.getElementById("send").onclick = function () {
+      var lines = []; for (var k in qty) if (qty[k]) lines.push("• " + qty[k] + "x " + k);
+      var nome = val("c-nome"), tel = val("c-tel"), end = val("c-end"), obs = val("c-obs");
+      var msg = "Olá! Gostaria de fazer uma encomenda:\n" + lines.join("\n");
+      if (nome) msg += "\n\nNome: " + nome;
+      if (tel) msg += "\nTelefone: " + tel;
+      if (end) msg += "\nEndereço: " + end;
+      if (obs) msg += "\nObservações: " + obs;
+      window.open("https://wa.me/5516981388876?text=" + encodeURIComponent(msg), "_blank");
+    };
+  </script>
+</body>
+
+</html>
