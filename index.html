@@ -612,14 +612,8 @@
     </div>
   </aside>
 
+  <script src="menu.js"></script>
   <script>
-    var data = {
-      bolos: [["Bolo de leite ninho", "Médio R$ 35 • Grande R$ 50"], ["Bolo de chocolate", "Médio R$ 35 • Grande R$ 50", "imagens/WhatsApp Image 2026-10-19 at 4.45.44 PM (1).jpeg"], ["Bolo formigueiro", "Médio R$ 35 • Grande R$ 50", "imagens/WhatsApp Image 2026-10-20 at 10.54.06 AM.jpeg"], ["Bolo de fubá", "Médio R$ 30 • Grande R$ 40", "imagens/WhatsApp Image 2026-10-20 at 9.19.10 AM.jpeg"], ["Bolo Mármore", "Médio R$ 35 • Grande R$ 50"], ["Bolo de côco", "Médio R$ 35 • Grande R$ 50", "bolo-coco.png"]],
-      doces: [["Brigadeiro", "R$ 120 o cento", "imagens/WhatsApp Image 2026-10-20 at 10.53.53 AM.jpeg"], ["Beijinho", "R$ 120 o cento", "imagens/WhatsApp Image 2026-10-20 at 10.53.39 AM.jpeg"], ["Leite ninho", "R$ 120 o cento", "imagens/WhatsApp Image 2026-10-20 at 10.53.12 AM.jpeg"], ["Casadinho", "R$ 120 o cento", "imagens/WhatsApp Image 2026-10-20 at 10.53.59 AM.jpeg"], ["Cajuzinho", "R$ 120 o cento", "imagens/WhatsApp Image 2026-10-20 at 10.55.19 AM.jpeg"], ["Brigadeiro de limão", "R$ 120 o cento"], ["Brigadeiro de Leite Ninho", "R$ 120 o cento", "imagens/WhatsApp Image 2026-10-20 at 10.55.25 AM.jpeg"]],
-      pote: [["Bolo no pote – Ninho", "R$ 12", "imagens/WhatsApp Image 2026-10-20 at 10.55.13 AM (1).jpeg"], ["Bolo no pote – Chocolatudo", "R$ 12", "imagens/WhatsApp Image 2026-10-19 at 4.45.43 PM.jpeg"], ["Bolo no pote – Ninho com brigadeiro", "R$ 12"], ["Bolo no pote – Abacaxi", "R$ 12", "imagens/WhatsApp Image 2026-10-19 at 4.45.43 PM (1).jpeg"], ["Bolo no pote – Floresta negra", "R$ 16", "imagens/WhatsApp Image 2026-10-20 at 10.53.33 AM.jpeg"], ["Bolo no pote – Prestígio", "R$ 12", "imagens/WhatsApp Image 2026-10-20 at 10.55.01 AM.jpeg"], ["Bolo no pote – Morango", "R$ 16", "imagens/WhatsApp Image 2026-10-20 at 10.54.52 AM (1).jpeg"]],
-      aniversario: [["Bolo de aniversário", "a combinar"], ["Fatias de bolo para aniversário", "a combinar"], ["Bolos no pote para aniversário", "a combinar"]],
-      mais: [["Pudim de leite grande", "", "pudim.png"], ["Pudim de leite médio", ""], ["Manjar – Mouses", ""]]
-    };
     var qty = {};
     function render(id, list) {
       var ul = document.getElementById(id);
@@ -656,6 +650,7 @@
       if (document.getElementById("drawer").classList.contains("aberto")) renderCarrinho();
     }
 
+    // Monta a lista do carrinho dentro do painel, com + / − / remover
     function renderCarrinho() {
       var box = document.getElementById("carrinho-itens");
       box.innerHTML = "";
