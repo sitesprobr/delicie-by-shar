@@ -536,6 +536,11 @@
       <p class="obs">Vendidos por cento (100 unidades) — R$ 120 cada cento.</p>
     </section>
     <section>
+      <h2>Mousse</h2>
+      <ul id="mousse"></ul>
+      <p class="obs">Valores combinados pelo WhatsApp.</p>
+    </section>
+    <section>
       <h2>🎉 Aniversários</h2>
       <video class="demo-video" src="WhatsApp Video 2026-10-19 at 4.45.44 PM (2).mp4" autoplay muted loop playsinline preload="metadata"></video>
       <ul id="aniversario"></ul>
@@ -638,7 +643,7 @@
         q.append(minus, out, plus); li.append(wrap, q); ul.appendChild(li);
       });
     }
-    render("pote", data.pote); render("bolos", data.bolos); render("doces", data.doces); render("aniversario", data.aniversario); render("mais", data.mais);
+    render("pote", data.pote); render("bolos", data.bolos); render("doces", data.doces); render("mousse", data.mousse); render("aniversario", data.aniversario); render("mais", data.mais);
 
     function totalItens() { var t = 0; for (var k in qty) t += qty[k]; return t; }
 
