@@ -4,6 +4,6 @@ var data = {
   mousse: [["Mousse de maracujá", "", "imagens/WhatsApp Image 2026-10-20 at 11.18.27 AM.jpeg"], ["Mousse de limão", "", "imagens/WhatsApp Image 2026-10-20 at 11.18.33 AM.jpeg"]],
   brownie: [["Brownie no copo", ""]],
   pote: [["Bolo no pote – Ninho", "R$ 12", "imagens/WhatsApp Image 2026-10-20 at 10.55.13 AM (1).jpeg"], ["Bolo no pote – Chocolatudo", "R$ 12", "imagens/WhatsApp Image 2026-10-19 at 4.45.43 PM.jpeg"], ["Bolo no pote – Ninho com brigadeiro", "R$ 12"], ["Bolo no pote – Abacaxi", "R$ 12", "imagens/WhatsApp Image 2026-10-19 at 4.45.43 PM (1).jpeg"], ["Bolo no pote – Floresta negra", "R$ 16", "imagens/WhatsApp Image 2026-10-20 at 10.53.33 AM.jpeg"], ["Bolo no pote – Prestígio", "R$ 12", "imagens/WhatsApp Image 2026-10-20 at 10.55.01 AM.jpeg"], ["Bolo no pote – Morango", "R$ 16", "imagens/WhatsApp Image 2026-10-20 at 10.54.52 AM (1).jpeg"]],
-  aniversario: [["Bolo de aniversário", "a combinar"], ["Fatias de bolo para aniversário", "a combinar"], ["Bolos no pote para aniversário", "a combinar"]],
+  aniversario: [["Bolo de aniversário", "a combinar"], ["Fatias de bolo para aniversário", "a combinar", "imagens/WhatsApp Image 2026-10-20 at 10.59.27 AM.jpeg"], ["Bolos no pote para aniversário", "a combinar"]],
   mais: [["Pudim de leite grande", "", "pudim.png"], ["Pudim de leite médio", ""], ["Manjar de coco", "", "imagens/WhatsApp Image 2026-10-20 at 10.59.05 AM.jpeg"]]
 };
